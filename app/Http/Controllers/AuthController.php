@@ -83,6 +83,6 @@ class AuthController extends Controller
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
         $user->update();
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
 }

@@ -46,6 +46,7 @@
         <div class="row">
             <div class="d-grid">
                 <button class="btn btn-warning">Update</button>
+                <a href="{{ route('products') }}" type="button" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </form>

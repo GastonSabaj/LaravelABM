@@ -21,13 +21,17 @@ class AjaxController extends Controller
         return response()->json($prices);
     }
 
-    public function filtrarProductosPorTitulo(Request $request)
+    public function filtrarProductos(Request $request)
     {
         // Obtener los datos del formulario de filtro
         $title = $request->input('title');
+        $product_type = $request->input('product_type');
 
         // Consulta para filtrar productos
-        $products = Product::where('title', 'like', "%$title%")->orderBy('created_at', 'DESC')->paginate(2);
+        // $products = Product::where('title', 'like', "%$title%")->orderBy('created_at', 'DESC')->paginate(2);
+
+        // Consulta para filtrar productos
+        $products = Product::where('title', 'like', "%$title%")->where('product_type', 'like', "%$product_type%")->orderBy('created_at', 'DESC')->paginate(2);
 
         // Devolver la vista completa de productos y paginación
         return view('product.index', compact('products'));

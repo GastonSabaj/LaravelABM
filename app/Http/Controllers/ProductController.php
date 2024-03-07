@@ -109,6 +109,7 @@ class ProductController extends Controller
     public function prueba(){
         //return view('carpetadeprueba.formdinamico');
         return view('carpetadeprueba.filtradortabla');
+        //return view('layouts.app');
     }
 
     public function pruebaAction(Request $request){

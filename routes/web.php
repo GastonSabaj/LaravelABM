@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\ContactoController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\User;
+use App\Mail\MyEmail;
 
 
 /*
@@ -55,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
     Route::post('/profile', [App\Http\Controllers\AuthController::class, 'profileUpdate'])->name('profile.update');
     Route::get('/productos', [App\Http\Controllers\AjaxController::class, 'getProducts'])->name('productos');
-    Route::post('/filtrar-productos-por-titulo', [App\Http\Controllers\AjaxController::class, 'filtrarProductosPorTitulo'])->name('filtrar_productos_por_titulo');
+    Route::post('/filtrar-productos', [App\Http\Controllers\AjaxController::class, 'filtrarProductos'])->name('filtrar_productos');
 
 
     Route::get('/prueba', [App\Http\Controllers\ProductController::class, 'prueba'])->name('prueba');
@@ -70,4 +72,11 @@ Route::middleware('auth')->group(function () {
         return $pdf->download('users-pdf.pdf');
     });
 
+    Route::get('/testroute',function(){
+        $name = "funny coder";
+        Mail::to('gastisabaj@hotmail.com')->send(new MyEmail($name));
+    });
+
+    Route::get('/contacto',[App\Http\Controllers\ContactoController::class, 'mostrarFormulario'])->name('mostrarFormulario');
+    Route::post('/enviar-correo',[App\Http\Controllers\ContactoController::class, 'enviarCorreo'])->name('enviarCorreo');
 });

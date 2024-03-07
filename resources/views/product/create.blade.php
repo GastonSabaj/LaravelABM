@@ -1,6 +1,6 @@
 @extends('layouts.app')
   
-@section('title', 'Edit Product')
+@section('title', 'Add Product')
   
 @section('contents')
     <h1 class="mb-0">Add Product</h1>
@@ -49,43 +49,45 @@
         <div class="row">
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{{ route('products') }}" type="button" class="btn btn-secondary">Back</a>
             </div>
         </div>
     </form>
-
-    @endsection
+@endsection
     
-    @section('custom-scripts')
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
-        <!-- Page level plugins -->
-        <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                // Inicializar el plugin Select2
-                $("#select-products").select2();
+@section('custom-scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
-                // Realizar la solicitud AJAX para obtener los precios
-                $.ajax({
-                    url: '{{ route("productos") }}', // Ruta que llama al método 'getProducts' en el controlador AjaxController
-                    type: 'GET',
-                    success: function(prices) {
-                        var select = $('#select-products');
-                        // Vaciar el elemento select antes de agregar los precios
-                        select.empty();
-                        // Iterar sobre los precios y agregarlos como opciones al select
-                        $.each(prices, function(index, price) {
-                            select.append($('<option>').text(price).attr('value', price));
-                        });
-                    }
-                });
+    <script src="{{ asset('admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('admin_assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
+    <!-- Page level plugins -->
+    <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Inicializar el plugin Select2
+            $("#select-products").select2();
+
+            // Realizar la solicitud AJAX para obtener los precios
+            $.ajax({
+                url: '{{ route("productos") }}', // Ruta que llama al método 'getProducts' en el controlador AjaxController
+                type: 'GET',
+                success: function(prices) {
+                    var select = $('#select-products');
+                    // Vaciar el elemento select antes de agregar los precios
+                    select.empty();
+                    // Iterar sobre los precios y agregarlos como opciones al select
+                    $.each(prices, function(index, price) {
+                        select.append($('<option>').text(price).attr('value', price));
+                    });
+                }
             });
+        });
 
-        </script>
-    @show
+    </script>
+@endsection

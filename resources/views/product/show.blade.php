@@ -35,4 +35,5 @@
             <input type="text" name="updated_at" class="form-control" placeholder="Updated At" value="{{ $product->updated_at }}" readonly>
         </div>
     </div>
+    <a href="{{ route('products') }}" type="button" class="btn btn-secondary">Back</a>
 @endsection
